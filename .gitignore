@@ -1,0 +1,6 @@
+dags/config.json
+.env
+pgdata
+plugins
+logs
+dags

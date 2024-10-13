@@ -1,0 +1,137 @@
+[2024-10-13T08:30:21.042+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-13T08:30:21.057+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_pipeline.scrape_task scheduled__2024-10-08T12:00:00+00:00 [queued]>
+[2024-10-13T08:30:21.065+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_pipeline.scrape_task scheduled__2024-10-08T12:00:00+00:00 [queued]>
+[2024-10-13T08:30:21.065+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 2
+[2024-10-13T08:30:21.079+0000] {taskinstance.py:2888} INFO - Executing <Task(_PythonDecoratedOperator): scrape_task> on 2024-10-08 12:00:00+00:00
+[2024-10-13T08:30:21.086+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=131) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-10-13T08:30:21.088+0000] {standard_task_runner.py:72} INFO - Started process 135 to run task
+[2024-10-13T08:30:21.088+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'crypto_pipeline', 'scrape_task', 'scheduled__2024-10-08T12:00:00+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/crypto_dag.py', '--cfg-path', '/tmp/tmp6ebdry3t']
+[2024-10-13T08:30:21.089+0000] {standard_task_runner.py:105} INFO - Job 10: Subtask scrape_task
+[2024-10-13T08:30:21.141+0000] {task_command.py:467} INFO - Running <TaskInstance: crypto_pipeline.scrape_task scheduled__2024-10-08T12:00:00+00:00 [running]> on host 6211324b1b0c
+[2024-10-13T08:30:21.211+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_pipeline' AIRFLOW_CTX_TASK_ID='scrape_task' AIRFLOW_CTX_EXECUTION_DATE='2024-10-08T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-08T12:00:00+00:00'
+[2024-10-13T08:30:21.213+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-10-13T08:30:21.213+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-10-13T08:30:21.213+0000] {logging_mixin.py:190} INFO - Current task name:scrape_task state:running start_date:2024-10-13 08:30:21.057747+00:00
+[2024-10-13T08:30:21.213+0000] {logging_mixin.py:190} INFO - Dag name:crypto_pipeline and current dag run status:running
+[2024-10-13T08:30:21.214+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-13T08:30:21.214+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/crypto_dag.py", line 27, in scrape_task
+    return scrape_crypto_data()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/scrape_coinmarketcap.py", line 11, in scrape_crypto_data
+    config = load_config()
+             ^^^^^^^^^^^^^
+  File "/opt/airflow/dags/scrape_coinmarketcap.py", line 6, in load_config
+    with open('config.json') as config_file:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.json'
+[2024-10-13T08:30:21.224+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-10-13T08:30:21.225+0000] {logging_mixin.py:190} INFO - Task start:2024-10-13 08:30:21.057747+00:00 end:2024-10-13 08:30:21.224435+00:00 duration:0.166688
+[2024-10-13T08:30:21.225+0000] {logging_mixin.py:190} INFO - Task:<Task(_PythonDecoratedOperator): scrape_task> dag:<DAG: crypto_pipeline> dagrun:<DagRun crypto_pipeline @ 2024-10-08 12:00:00+00:00: scheduled__2024-10-08T12:00:00+00:00, state:running, queued_at: 2024-10-13 08:25:11.335258+00:00. externally triggered: False>
+[2024-10-13T08:30:21.226+0000] {logging_mixin.py:190} INFO - Failure caused by [Errno 2] No such file or directory: 'config.json'
+[2024-10-13T08:30:21.226+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=crypto_pipeline, task_id=scrape_task, run_id=scheduled__2024-10-08T12:00:00+00:00, execution_date=20241008T120000, start_date=20241013T083021, end_date=20241013T083021
+[2024-10-13T08:30:21.242+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-13T08:30:21.243+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 10 for task scrape_task ([Errno 2] No such file or directory: 'config.json'; 135)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/crypto_dag.py", line 27, in scrape_task
+    return scrape_crypto_data()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/scrape_coinmarketcap.py", line 11, in scrape_crypto_data
+    config = load_config()
+             ^^^^^^^^^^^^^
+  File "/opt/airflow/dags/scrape_coinmarketcap.py", line 6, in load_config
+    with open('config.json') as config_file:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.json'
+[2024-10-13T08:30:21.262+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-10-13T08:30:21.287+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-10-13T08:30:21.293+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
